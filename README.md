@@ -1,7 +1,9 @@
 Plot
 ====
 
-Lua implementation of simple rasterization algorithms. Based mainly on C-implementation by Zingl Alois, see http://members.chello.at/~easyfilter/bresenham.html. All presented functions take plotting function as the first argument. Plotting function must process 3 arguments: x and y coordinates and alpha value ( 0 -- minimum, 1 - maximum ). For not antialiased algorithms alpha value is always equals 1.
+Lua implementation of simple rasterization algorithms. Based mainly on C-implementation by Zingl Alois, see http://members.chello.at/~easyfilter/bresenham.html. 
+
+All presented functions take plotting function as the first argument. Algorithms pass 3 arguments to plotting function: x and y coordinates and alpha value ( 0 -- minimum, 1 - maximum ). For not antialiased algorithms alpha value is always equals 1. If plotting function returns non-false result then algorithm will halt.
 
 Plot.line( f, x0, y0, x1, y1 )
 ------------------------------

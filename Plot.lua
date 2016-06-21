@@ -7,6 +7,7 @@
 -- Algorithms pass 3 parameters to a plotting function:
 -- x and y coordinates and alpha value ( 0 -- minimum, 1 - maximum ), 
 -- for not antialiased algorithms alpha value is always equals 1.
+-- If plotting function return non-false result then algorithm will halt.
 --
 -- coded by Ilya Kolbin ( iskolbin@gmail.com )
 
