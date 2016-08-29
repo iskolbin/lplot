@@ -23,6 +23,17 @@ local function plot( x, y, v )
 	Luabox.setcell( '*', x, y, 0, Luabox.gray( v ))
 end
 
+local function drawclock()
+	local cx, cy = math.floor(w/2), math.floor(h/2)
+	local hs, ms, ss = os.date('%H,%M,%S'):gmatch( '(%d+),(%d+),(%d+)', tonumber )()
+	local ahs, ams, ass = (hs % 12) * math.pi, (hs % 60) * math.pi, (ss % 60) * math.pi
+	local minr = math.min( cx, cy )
+	local rh, rm, rs = math.floor( minr * 0.33 ), math.floor( minr * 0.66), math.floor( minr * 0.99 ) 
+	Plot.ellipse( plot, x0, y0, w, h )
+	-- TODO
+	--Plot.lineaa( plot, cx, cy, ) 
+end
+
 local function updatedraw()
 	local x0, y0 = math.floor(w/2), math.floor(h/2) 
 	if mode == 'line' then
@@ -33,6 +44,8 @@ local function updatedraw()
 		Plot.ellipse( plot, x0, y0, playerx, playery )
 	elseif mode == 'lineaa' then
 		Plot.lineaa( plot, playerx, playery, x0, y0 )
+	elseif mode == 'clock' then
+		drawclock()
 	end
 end
 
