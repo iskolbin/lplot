@@ -23,15 +23,28 @@ local function plot( x, y, v )
 	Luabox.setcell( '*', x, y, 0, Luabox.gray( v ))
 end
 
+local function ploth( x, y, v )
+	Luabox.setcell( ' ', x, y, 0, Luabox.rgb( v, 0, 0 ))
+end
+
+local function plotm( x, y, v )
+	Luabox.setcell( ' ', x, y, 0, Luabox.gray( v ))
+end
+
+local function plots( x, y, v )
+	Luabox.setcell( ' ', x, y, 0, Luabox.gray( v * 0.75 ))
+end
+
 local function drawclock()
 	local cx, cy = math.floor(w/2), math.floor(h/2)
 	local hs, ms, ss = os.date('%H,%M,%S'):gmatch( '(%d+),(%d+),(%d+)', tonumber )()
-	local ahs, ams, ass = (hs % 12) * math.pi, (hs % 60) * math.pi, (ss % 60) * math.pi
+	local ahs, ams, ass = (hs % 12) * 2*math.pi/12, (hs % 60) * 2*math.pi/60, (ss % 60) * 2*math.pi/60
 	local minr = math.min( cx, cy )
 	local rh, rm, rs = math.floor( minr * 0.33 ), math.floor( minr * 0.66), math.floor( minr * 0.99 ) 
-	Plot.ellipse( plot, x0, y0, w, h )
-	-- TODO
-	--Plot.lineaa( plot, cx, cy, ) 
+	Plot.ellipse( plot, x0, y0, w-1, h-1 )
+	Plot.lineaa( plots, cx, cy, math.floor(cx+rs*math.cos(ass)), math.floor(cy+rs*math.sin(ass)))
+	Plot.lineaa( plotm, cx, cy, math.floor(cx+rm*math.cos(ams)), math.floor(cy+rm*math.sin(ams)))
+	Plot.lineaa( ploth, cx, cy, math.floor(cx+rh*math.cos(ahs)), math.floor(cy+rh*math.sin(ahs)))
 end
 
 local function updatedraw()
@@ -56,7 +69,9 @@ local function nextmode()
 		mode = 'ellipse'
 	elseif mode == 'ellipse' then
 		mode = 'lineaa'
-	else
+	elseif mode == 'lineaa' then
+		mode = 'clock'
+	elseif mode == 'clock' then
 		mode = 'line'
 	end
 end
@@ -86,7 +101,6 @@ end
 local function onresize( neww, newh )
 	w, h = neww, newh
 	render()
-	addlog( 'w=' .. w .. ' h=' .. h )
 end
 
 Luabox.init( Luabox.INPUT_CURRENT, Luabox.OUTPUT_256 )
