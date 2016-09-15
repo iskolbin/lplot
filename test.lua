@@ -13,26 +13,26 @@ local function addlog( v )
 end
 
 local function render()
-	Luabox.setcell( '@', playerx, playery, 0, Luabox.rgb( 1, 0, 0 )) 
+	Luabox.setcell( '@', playerx, playery, 0, Luabox.rgbf( 1, 0, 0 )) 
 	Luabox.present()
 end
 
 local running = true
 
 local function plot( x, y, v )
-	Luabox.setcell( '*', x, y, 0, Luabox.gray( v ))
+	Luabox.setcell( '*', x, y, 0, Luabox.grayf( v ))
 end
 
 local function ploth( x, y, v )
-	Luabox.setcell( ' ', x, y, 0, Luabox.rgb( v, 0, 0 ))
+	Luabox.setcell( ' ', x, y, 0, Luabox.rgbf( v, 0, 0 ))
 end
 
 local function plotm( x, y, v )
-	Luabox.setcell( ' ', x, y, 0, Luabox.gray( v ))
+	Luabox.setcell( ' ', x, y, 0, Luabox.grayf( v ))
 end
 
 local function plots( x, y, v )
-	Luabox.setcell( ' ', x, y, 0, Luabox.gray( v * 0.75 ))
+	Luabox.setcell( ' ', x, y, 0, Luabox.grayf( v * 0.75 ))
 end
 
 local function drawclock()
