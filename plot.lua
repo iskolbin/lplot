@@ -13,11 +13,11 @@
 
 local abs, floor = math.abs, math.floor
 
-local Plot = {}
+local plot = {}
 
 -- Bresenham's line algorithm
--- https://en.wikipedia.org/wiki/Plot%27s_line_algorithm
-function Plot.line( f, x0, y0, x1, y1 )
+-- https://en.wikipedia.org/wiki/plot%27s_line_algorithm
+function plot.line( f, x0, y0, x1, y1 )
 	local dx, sx = abs( x1 - x0 ), x0 < x1 and 1 or -1
 	local dy, sy = -abs( y1 - y0 ), y0 < y1 and 1 or -1
 	local err, e2 = dx + dy, 0
@@ -41,7 +41,7 @@ end
 
 -- Midpoint circle algorithm
 -- see https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
-function Plot.circle( f, x0, y0, r )
+function plot.circle( f, x0, y0, r )
 	local x, y, err = -r, 0, 2 - 2*r -- II. Quadrant 
 	repeat
 		if f( x0 - x, y0 + y, 1 ) -- I. Quadrant
@@ -66,7 +66,7 @@ function Plot.circle( f, x0, y0, r )
 	until x > 0 
 end
 
-function Plot.ellipse( f, x0, y0, x1, y1 )
+function plot.ellipse( f, x0, y0, x1, y1 )
 	local a, b = abs( x1-x0 ), abs( y1-y0 ) -- values of diameter
 	local b1 = b % 2
 	local dx, dy = 4*(1-a)*b*b, 4*(b1+1)*a*a -- error increment
@@ -126,7 +126,7 @@ end
 
 -- Xiaolin Wu's line algorithm
 -- https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm
-function Plot.lineaa( f, x0, y0, x1, y1 )
+function plot.lineaa( f, x0, y0, x1, y1 )
 	local dx, sx = abs( x1 - x0 ), x0 < x1 and 1 or -1
 	local dy, sy = abs( y1 - y0 ), y0 < y1 and 1 or -1
 	local err = dx - dy
@@ -165,4 +165,4 @@ function Plot.lineaa( f, x0, y0, x1, y1 )
 	end
 end
 
-return Plot
+return plot
