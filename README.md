@@ -1,5 +1,5 @@
-Plot
-====
+Lua plot
+========
 
 Lua implementation of simple rasterization algorithms. Based mainly on C-implementation by Zingl Alois, see http://members.chello.at/~easyfilter/bresenham.html. 
 
